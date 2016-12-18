@@ -1,5 +1,5 @@
-# react-boilerplate
-simple react boilerplate
+# react-todo
+simple react todo app
 
 ```bash
 $ npm install
