@@ -11,7 +11,7 @@ var TodoSearch = React.createClass({
         },
         render: function () {
             return (
-                <div>
+                <div className="container__header">
                     <form onSubmit={this.addTodo}>
                         <div>
                             <input type="search" placeholder="Search todo" ref="searchtext" onChange={this.changeSearch}/>
