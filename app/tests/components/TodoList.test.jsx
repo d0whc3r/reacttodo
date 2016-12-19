@@ -21,7 +21,8 @@ describe('TodoList', () => {
                 id: 2,
                 text: 'something2'
             }];
-            var todoList = TestUtils.renderIntoDocument(<TodoList todos={todos}/>);
+            var todoList = TestUtils.renderIntoDocument(<TodoList todos={todos} onToggle={() => {
+            }}/>);
             var todosComps = TestUtils.scryRenderedComponentsWithType(todoList, Todo);
 
             expect(todosComps.length).toBe(todos.length);
