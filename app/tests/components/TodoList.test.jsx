@@ -14,10 +14,10 @@ describe('TodoList', () => {
 
     describe('Todo Handler', () => {
         it('should render one Todo component for each item', () => {
-            var todos=[{
+            var todos = [{
                 id: 1,
                 text: 'something'
-            },{
+            }, {
                 id: 2,
                 text: 'something2'
             }];
