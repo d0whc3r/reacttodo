@@ -1,8 +1,10 @@
 var React = require('react');
+var uuid = require('node-uuid');
+
 var TodoList = require('TodoList');
 var TodoForm = require('TodoForm');
 var TodoSearch = require('TodoSearch');
-var uuid = require('node-uuid');
+var TodoApi = require('TodoApi');
 
 var TodoApp = React.createClass({
     getInitialState: function () {
@@ -19,6 +21,14 @@ var TodoApp = React.createClass({
                 completed: true
             }]
         };
+    },
+    componentDidUpdate: function () {
+        TodoApi.setTodos(this.state.todos);
+    },
+    componentWillMount: function () {
+        this.setState({
+            todos: TodoApi.getTodos()
+        });
     },
     handleAddTodo: function (text) {
         this.setState({
