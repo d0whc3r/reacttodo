@@ -13,8 +13,7 @@ var TodoForm = React.createClass({
             } else {
                 this.refs.todo.focus();
             }
-        }
-        ,
+        },
         render: function () {
             return (
                 <div>
