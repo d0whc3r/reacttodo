@@ -9,7 +9,7 @@ export var TodoForm = React.createClass({
             var todo = this.refs.todo.value;
             if (todo && todo.length) {
                 this.refs.todo.value = '';
-                dispatch(actions.addTodo(todo))
+                dispatch(actions.startAddTodo(todo))
             } else {
                 this.refs.todo.focus();
             }
