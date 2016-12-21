@@ -3,9 +3,6 @@ var {connect} = require('react-redux');
 var actions = require('actions');
 
 export var TodoForm = React.createClass({
-        propTypes: {
-            onAddTodo: React.PropTypes.func.isRequired
-        },
         addTodo: function (e) {
             e.preventDefault();
             var {dispatch} = this.props;

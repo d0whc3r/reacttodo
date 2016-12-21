@@ -10,6 +10,7 @@ describe('Actions', () => {
         var res = actions.setSearchText(action.searchText);
         expect(res).toEqual(action);
     });
+
     it('should generate add action', () => {
         var action = {
             type: 'ADD_TODO',
@@ -18,6 +19,7 @@ describe('Actions', () => {
         var res = actions.addTodo(action.text);
         expect(res).toEqual(action);
     });
+
     it('should generate showcompleted action', () => {
         var action = {
             type: 'TOGGLE_SHOW_COMPLETE'
@@ -25,12 +27,29 @@ describe('Actions', () => {
         var res = actions.toggleShowCompleted();
         expect(res).toEqual(action);
     });
-    it('should generate completed  action', () => {
+
+    it('should generate completed action', () => {
         var action = {
             type: 'TOGGLE_TODO',
             id: 5
         };
         var res = actions.toggleTodo(action.id);
+        expect(res).toEqual(action);
+    });
+
+    it('should generate add todos action', () => {
+        var todos = [{
+            id: '111',
+            text: 'some text1',
+            completed: false,
+            completedAd: undefined,
+            createdAt: 4333
+        }];
+        var action = {
+            type: 'ADD_TODOS',
+            todos
+        };
+        var res = actions.addTodos(todos);
         expect(res).toEqual(action);
     });
 });
