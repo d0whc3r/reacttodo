@@ -29,7 +29,7 @@ module.exports = function (config) {
         loglevel: config.LOG_DEBUG,
         client: {
             mocha: {
-                timeout: '5000'
+                timeout: '10000'
             }
         },
         webpack: webpackConfig,
