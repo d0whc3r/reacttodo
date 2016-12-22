@@ -1,22 +1,4 @@
 var TodoApi = {
-
-    setTodos: function (todos) {
-        if ($.isArray(todos)) {
-            localStorage.setItem('todos', JSON.stringify(todos));
-        }
-    },
-
-    getTodos: function () {
-        var data = localStorage.getItem('todos');
-        var result = [];
-        try {
-            result = JSON.parse(data);
-        } catch (e) {
-            result = [];
-        }
-        return $.isArray(result) ? result : [];
-    },
-
     filterTodos: function (todos, completed, text) {
         var filtered = todos;
         filtered = filtered.filter((todo) => !todo.completed || completed);
