@@ -4,7 +4,8 @@ var expect = require('expect');
 var $ = require('jquery');
 var TestUtils = require('react-addons-test-utils');
 
-var {Todo} = require('Todo');
+import * as actions from 'actions';
+import {Todo} from 'Todo';
 
 describe('Todo', () => {
     it('should exist', () => {
@@ -17,13 +18,12 @@ describe('Todo', () => {
             text: 'Todo.test.jsx toggle_todo',
             completed: true
         };
+        var action = actions.startToggleTodo(data.id, !data.completed);
+
         var spy = expect.createSpy();
         var todo = TestUtils.renderIntoDocument(<Todo {...data} dispatch={spy}/>);
         var $el = $(ReactDOM.findDOMNode(todo));
         TestUtils.Simulate.click($el[0]);
-        expect(spy).toHaveBeenCalledWith({
-            type: 'TOGGLE_TODO',
-            id: data.id
-        });
+        expect(spy).toHaveBeenCalledWith(action);
     });
 });
