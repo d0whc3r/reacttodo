@@ -32,22 +32,6 @@ describe('Actions', () => {
         expect(res).toEqual(action);
     });
 
-    it('should startAddTodo (async) create todo and dispatch add todo', (done) => {
-        var store = createMockStore({});
-        const text = 'some text';
-
-        store.dispatch(actions.startAddTodo(text)).then(() => {
-            const actions = store.getActions();
-            expect(actions[0]).toInclude({
-                type: 'ADD_TODO'
-            });
-            expect(actions[0].todo).toInclude({
-                text: text
-            });
-            done();
-        }).catch(done);
-    });
-
     it('should generate showcompleted action', () => {
         var action = {
             type: 'TOGGLE_SHOW_COMPLETE'
@@ -108,25 +92,33 @@ describe('Actions', () => {
             completed: false,
             createdAt: 23444
         };
+        var uid;
+        var todosRef;
 
         beforeEach((done) => {
-            var todosRef = firebaseRef.child('todos');
-
+            var credential = firebase.auth.GithubAuthProvider.credential(process.env.GITHUB_TOKEN);
+            uid = '2ErpuZHozYWbpwLac9MNzZWI6pE2';
+            todosRef = firebaseRef.child(`users/${uid}/todos`);
+            // firebase.auth().signInWithCredential(credential).then((user) => {
+            //     uid = user.uid;
+            //     todosRef = firebaseRef.child(`users/${uid}/todos`);
+            //     return todosRef.remove();
+            // })
             todosRef.remove().then(() => {
-                testTodoRef = firebaseRef.child('todos').push();
+                    testTodoRef = todosRef.push();
 
-                return testTodoRef.set(mockTodo);
-            })
+                    return testTodoRef.set(mockTodo);
+                })
                 .then(() => done())
                 .catch(done);
         });
 
         afterEach((done) => {
-            testTodoRef.remove().then(() => done()).catch(done);
+            todosRef.remove().then(() => done()).catch(done);
         });
 
         it('should toggle todo and dispatch update todo action', (done) => {
-            var store = createMockStore({});
+            var store = createMockStore({auth: {uid}});
             var action = actions.startToggleTodo(testTodoRef.key, true);
 
             store.dispatch(action).then(() => {
@@ -143,8 +135,9 @@ describe('Actions', () => {
                 done();
             }, done);
         });
+
         it('should add existing items with add todos', (done) => {
-            var store = createMockStore({});
+            var store = createMockStore({auth: {uid}});
             var action = actions.startAddTodos();
 
             store.dispatch(action).then(() => {
@@ -156,6 +149,22 @@ describe('Actions', () => {
 
                 done();
             }, done);
+        });
+
+        it('should startAddTodo (async) create todo and dispatch add todo', (done) => {
+            var store = createMockStore({auth: {uid}});
+            const text = 'some text';
+
+            store.dispatch(actions.startAddTodo(text)).then(() => {
+                const actions = store.getActions();
+                expect(actions[0]).toInclude({
+                    type: 'ADD_TODO'
+                });
+                expect(actions[0].todo).toInclude({
+                    text: text
+                });
+                done();
+            }).catch(done);
         });
     });
 });
