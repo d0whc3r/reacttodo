@@ -1,9 +1,9 @@
-var React = require('react');
-var ReactDOM = require('react-dom');
-var {Provider} = require('react-redux');
-var expect = require('expect');
-var $ = require('jquery');
-var TestUtils = require('react-addons-test-utils');
+import React from 'react';
+import ReactDOM from 'react-dom';
+import {Provider} from 'react-redux';
+import expect from 'expect';
+import $ from 'jquery';
+import TestUtils from 'react-addons-test-utils';
 
 import {configure} from 'configureStore';
 import ConnectedTodoList, {TodoList} from 'TodoList';
@@ -36,7 +36,7 @@ describe('TodoList', () => {
                 <Provider store={store}>
                     <ConnectedTodoList/>
                 </Provider>
-            )
+            );
             var todoList = TestUtils.scryRenderedComponentsWithType(provider, ConnectedTodoList)[0];
             var todosComps = TestUtils.scryRenderedComponentsWithType(todoList, ConnectedTodo);
 

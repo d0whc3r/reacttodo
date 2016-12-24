@@ -1,11 +1,11 @@
-var React = require('react');
-var ReactDOM = require('react-dom');
-var expect = require('expect');
-var $ = require('jquery');
-var TestUtils = require('react-addons-test-utils');
+import React from 'react';
+import ReactDOM from 'react-dom';
+import expect from 'expect';
+import $ from 'jquery';
+import TestUtils from 'react-addons-test-utils';
 
 import * as actions from 'actions';
-var {TodoForm} = require('TodoForm');
+import {TodoForm} from 'TodoForm';
 
 describe('TodoForm', () => {
     it('should exist', () => {

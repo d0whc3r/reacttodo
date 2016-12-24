@@ -1,7 +1,7 @@
-var React = require('react');
-var {connect} = require('react-redux');
+import React from 'react';
+import {connect} from 'react-redux';
 import Todo from 'Todo';
-var TodoApi = require('TodoApi');
+import TodoApi from 'TodoApi';
 
 export class TodoList extends React.Component {
     render() {

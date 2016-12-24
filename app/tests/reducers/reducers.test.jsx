@@ -1,7 +1,7 @@
-var expect = require('expect');
-var df = require('deep-freeze-strict');
+import expect from 'expect';
+import df from 'deep-freeze-strict';
 
-var reducers = require('reducers');
+import * as reducers from 'reducers';
 
 describe('Reducers', () => {
     describe('SearchText', () => {

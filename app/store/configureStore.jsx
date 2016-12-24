@@ -1,20 +1,20 @@
 import * as redux from 'redux';
 import thunk from 'redux-thunk';
 
-import {searchTextReducer, showCompletedReducer, todosReducer, authReducer} from 'reducers';
+import * as reducers from 'reducers';
 
 export var configure = (initialState = {}) => {
-    var reducer = redux.combineReducers({
-        searchText: searchTextReducer,
-        showCompleted: showCompletedReducer,
-        todos: todosReducer,
-        auth: authReducer
+    var mapreducers = {};
+    Object.keys(reducers).forEach((rname) => {
+        var rvalue = rname.replace('Reducer', '');
+        mapreducers[rvalue] = reducers[rname];
     });
+    var combineReducers = redux.combineReducers(mapreducers);
 
-    var store = redux.createStore(reducer, initialState, redux.compose(
+    return redux.createStore(combineReducers, initialState, redux.compose(
         redux.applyMiddleware(thunk),
         window.devToolsExtension ? window.devToolsExtension() : f => f
     ));
-
-    return store;
 };
+
+export default configure;
