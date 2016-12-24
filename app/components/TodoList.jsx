@@ -1,16 +1,18 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import {withTranslate} from 'react-redux-multilingual';
+
 import Todo from 'Todo';
 import TodoApi from 'TodoApi';
 
 export class TodoList extends React.Component {
     render() {
-        var {todos, showCompleted, searchText} = this.props;
+        var {todos, showCompleted, searchText, translate} = this.props;
         var renderTodos = () => {
             var filteredTodos = TodoApi.filterTodos(todos, showCompleted, searchText);
             if (!filteredTodos.length) {
                 return (
-                    <p className="container__message">Nothing to do</p>
+                    <p className="container__message">{translate('notodos')}</p>
                 );
             }
             return filteredTodos.map((todo) => {
@@ -27,4 +29,4 @@ export class TodoList extends React.Component {
 
 export default connect((state) => {
     return state;
-})(TodoList);
+})(withTranslate(TodoList));
