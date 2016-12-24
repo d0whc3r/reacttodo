@@ -3,12 +3,6 @@
   "version": "1.0.0",
   "description": "simple react todo app",
   "main": "index.js",
-  "scripts": {
-    "test": "NODE_ENV=test karma start",
-    "build": "webpack",
-    "start": "npm run build && node server.js",
-    "oldpostinstall": "webpack --config ./webpack.config.js --progress --colors --display-error-details --display-cached"
-  },
   "author": "",
   "license": "MIT",
   "dependencies": {
@@ -44,6 +38,12 @@
     "webpack": "^1.14.0"
   },
   "devDependencies": {
+    "devtron": "^1.4.0",
+    "electron": "^1.4.13",
+    "electron-debug": "^1.1.0",
+    "electron-packager": "^8.4.0",
+    "electron-rebuild": "^1.4.0",
+    "electron-reload": "^1.1.0",
     "karma": "^1.3.0",
     "karma-chrome-launcher": "^2.0.0",
     "karma-mocha": "^1.3.0",
@@ -51,5 +51,21 @@
     "karma-sourcemap-loader": "^0.3.7",
     "karma-webpack": "^1.8.1",
     "mocha": "^3.2.0"
+  },
+  "electronOut": "dist-electron",
+  "electronPath": "./public",
+  "electronVersion": "1.4.13",
+  "scripts": {
+    "test": "NODE_ENV=test karma start",
+    "build": "NODE_ENV=development webpack --progress",
+    "build-prod": "NODE_ENV=production webpack --progress --colors",
+    "packelectron-linux": "npm run build-prod && npm run pack",
+    "start": "npm run build && node server.js",
+    "electron": "npm run build && npm run electron-run",
+    "electron-run": "NODE_ENV=development electron $npm_package_electonPath",
+    "oldpostinstall": "webpack --config ./webpack.config.js --progress --colors --display-error-details --display-cached",
+    "pack": "electron-packager $npm_package_electronPath $npm_package_name --app-version=$npm_package_version --out=$npm_package_electronOut --prune --asar --platform=linux --arch=x64 --version=$npm_package_electronVersion --overwrite",
+    "pack-win-linux": "electron-packager $npm_package_electronPath $npm_package_name --app-version=$npm_package_version --out=$npm_package_electronOut --prune --asar --platform=win32 --arch=x64 --version=$npm_package_electronVersion --version-string.OriginalFilename=$npm_package_name --version-string.InternalName=$npm_package_name --version-string.ProductName=$npm_package_name --version-string.ProductVersion=$npm_package_version --icon=./app/favicon.ico --overwrite",
+    "pack-win": "electron-packager $npm_package_electronPath %npm_package_name% --app-version=%npm_package_version% --out=%npm_package_electronOut% --prune --asar --platform=win32 --arch=x64 --version=%npm_package_electronVersion% --version-string.OriginalFilename=%npm_package_name% --version-string.InternalName=%npm_package_name% --version-string.ProductName=%npm_package_name% --version-string.ProductVersion=%npm_package_version% --icon=./app/favicon.ico --overwrite"
   }
 }

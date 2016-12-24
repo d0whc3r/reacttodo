@@ -1,0 +1,9 @@
+{
+  "name": "electronapp",
+  "description": "electron app",
+  "main": "index.js",
+  "dependencies": {
+    "html-pdf": "^2.1.0",
+    "sqlite3": "^3.1.8"
+  }
+}
