@@ -10,6 +10,7 @@ import firebase from 'app/firebase/';
 import router from 'app/router/';
 import {translations} from 'app/i18n/translations';
 
+window.$ = window.jQuery = require('jquery');
 var store = configure();
 firebase.auth().onAuthStateChanged((user) => {
     if (user) {
