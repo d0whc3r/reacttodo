@@ -1,4 +1,5 @@
-var webpackConfig = require('./webpack.config');
+// import webpackConfig from './webpack.config.babel';
+var webpackConfig = require('./webpack.config.babel');
 
 module.exports = function (config) {
     config.set({

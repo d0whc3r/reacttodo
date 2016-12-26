@@ -1,8 +1,7 @@
-node_modules/
-.idea/
-*.iml
+node_modules
 yarn.lock
 npm-debug.log
-public/bundle.js
-config/
-playground/
+app/config/
+public/
+!public/index.html
+.idea/

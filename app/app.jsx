@@ -11,16 +11,16 @@ import router from 'app/router/';
 import {translations} from 'app/i18n/translations';
 
 var store = configure();
-firebase.auth().onAuthStateChanged((user) => {
-    if (user) {
-        store.dispatch(actions.login(user.uid));
-        store.dispatch(actions.startAddTodos());
-        hashHistory.push('/todos');
-    } else {
-        store.dispatch(actions.logout());
-        hashHistory.push('/');
-    }
-});
+// firebase.auth().onAuthStateChanged((user) => {
+//   if (user) {
+//     store.dispatch(actions.login(user.uid));
+//     store.dispatch(actions.startAddTodos());
+//     hashHistory.replace('/todos');
+//   } else {
+//     store.dispatch(actions.logout());
+//     hashHistory.replace('/');
+//   }
+// });
 
 // Load fundation
 $(document).foundation();
@@ -29,12 +29,12 @@ $(document).foundation();
 require('style!css!sass!applicationStyles');
 
 ReactDOM.render(
-    <Provider store={store}>
-        <IntlProvider translations={translations}>
-            {router}
-        </IntlProvider>
-    </Provider>,
-    document.getElementById('app')
+  <Provider store={store}>
+    <IntlProvider translations={translations}>
+      {router}
+    </IntlProvider>
+  </Provider>,
+  document.getElementById('app')
 );
 
 store.dispatch(IntlActions.setLocale('es'));
