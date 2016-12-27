@@ -1,14 +1,17 @@
-@import "base/variables";
-@import "base/style";
-
 // Foundation
-@import "base/foundation-settings";
-@import "foundation";
+@import "~foundation-sites/scss/foundation";
 @include foundation-everything;
+// Sass utilities
+@import '~foundation-sites/scss/util/util';
+// Global variables and styles
+@import '~foundation-sites/scss/global';
 
-// Components
-@import "components/callout-auth";
-@import "components/container";
-@import "components/page-actions";
-@import "components/page-title";
-@import "components/todo";
+@import "base/variables";
+@import "base/foundation-settings";
+// scss:start
+@import "../components/styles/callout-auth";
+@import "../components/styles/container";
+@import "../components/styles/page-actions";
+@import "../components/styles/page-title";
+@import "../components/styles/todo";
+// scss:end

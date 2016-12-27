@@ -1,7 +1,6 @@
 var webpack = require('webpack');
 var path = require('path');
 var envFile = require('node-env-file');
-// var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var CopyWebpackPlugin = require('copy-webpack-plugin');
 
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';
@@ -10,12 +9,13 @@ var vfile = 'app/config/' + process.env.NODE_ENV + '.env';
 try {
   envFile(path.join(__dirname, vfile));
 } catch (e) {
-  console.log('[!] Error loading ' + vfile);
+  console.log('[!] Error loading ENVFile: ' + vfile);
 }
+
+var outputdir = path.resolve(__dirname, 'public')
 
 var config = {
   context: __dirname,
-  // entry: './entry.js',
   entry: [
     'script!jquery/dist/jquery.min.js',
     'script!foundation-sites/dist/js/foundation.min.js',
@@ -25,7 +25,7 @@ var config = {
     jquery: 'jQuery'
   },
   output: {
-    path: path.resolve(__dirname, 'public'),
+    path: outputdir,
     filename: 'bundle.js'
   },
   module: {
@@ -36,16 +36,9 @@ var config = {
       query: {
         presets: ['react', 'es2015', 'stage-0']
       },
-    // }, {
-    //   test: /\.scss$/,
-    //   loader: ExtractTextPlugin.extract('style', 'css!sass'),
-    //   include: [
-    //     path.resolve(__dirname, 'app/styles'),
-    //   ]
     }]
   },
   plugins: [
-    // new ExtractTextPlugin('app.css'),
     new webpack.ProvidePlugin({
       '$': 'jquery',
       'jQuery': 'jquery'
@@ -92,8 +85,7 @@ var config = {
   },
   sassLoader: {
     includePaths: [
-      path.resolve(__dirname, './node_modules/foundation-sites/scss'),
-      path.resolve(__dirname, './app/styles')
+      path.resolve(__dirname, './node_modules/foundation-sites/scss')
     ]
   },
   devtool: process.env.NODE_ENV === 'production' ? undefined : 'cheap-module-eval-source-map'
